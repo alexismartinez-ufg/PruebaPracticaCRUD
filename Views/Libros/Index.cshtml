@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Lista de libros";
+}
+
+@model List<Libro>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <script>
+        alert('@ViewBag.Mensaje');
+    </script>
+}
+
+<div class="container">
+    <div class="row text-center mb-3">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#AgregarLibro">Agregar Libro</button>
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr class="table-Active table-secondary">
+                        <th>#</th>
+                        <th>Nombre del libro</th>
+                        <th>Nombre del autor</th>
+                        <th>Fecha de cración</th>
+                        <th>Numero de aginas</th>
+                        <th>Idioma</th>
+                        <th>Cantidad disponible</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var libro in Model)
+                    {
+                        <tr>
+                            <td>@libro.IdLibro</td>
+                            <td>@libro.NombreLibro</td>
+                            <td>@libro.NombreAutor</td>
+                            <td>@libro.FechaCreacion</td>
+                            <td>@libro.NumeroPaginas</td>
+                            <td>@libro.Idioma</td>
+                            <td>@libro.CantidadDisponible</td>
+                            <td>
+                                <a href="@Url.Action("EditarLibro", "Libros", new { id = libro.IdLibro })" class="btn btn-outline-warning">Editar</a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EliminarLibro", "Libros", new { id = libro.IdLibro })" class="btn btn-outline-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="text-center">
+                <h3 class="display-4">No hay libros aun.</h3>
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    @await Html.PartialAsync("_NewLibro", new Libro())
+</div>

@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Reservas de libros";
+}
+@model List<Reservacion>
+
+@if (!string.IsNullOrEmpty(ViewBag.Error))
+{
+    <script>
+        alert('@ViewBag.Mensaje');
+    </script>
+}
+
+<div class="container">
+    <div class="row text-center mb-3">
+        <h1 class="display-4">@ViewData["Title"]</h1>
+    </div>
+
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#AgregarReserva">Agregar Reservación</button>
+        </div>
+    </div>
+
+    <div class="row">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr class="table-Active table-secondary">
+                        <th>#</th>
+                        <th>Persona que reserva</th>
+                        <th>Fecha y hora de Reserva</th>
+                        <th>Nombre del libro</th>
+                        <th>Días a Reservar</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservacion in Model)
+                    {
+                        <tr>
+                            <td>@reservacion.IdReservacion</td>
+                            <td>@reservacion.NombrePersona</td>
+                            <td>@reservacion.FechaReserva</td>
+                            <td>@reservacion.Libro.NombreLibro</td>
+                            <td>@reservacion.DiasAReservar</td>
+                            <td>
+                                <a href="@Url.Action("EditarReservacion", "Home", new { id = reservacion.IdReservacion })" class="btn btn-outline-warning">Editar</a>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("EliminarReservacion", "Home", new { id = reservacion.IdReservacion })" class="btn btn-outline-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div class="text-center">
+                <h3 class="display-4">No hay reservaciones aun.</h3>
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    @await Html.PartialAsync("_NewReservacion", new Reservacion())
+</div>

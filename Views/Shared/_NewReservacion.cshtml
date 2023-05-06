@@ -1,0 +1,59 @@
+﻿@model Reservacion
+
+<!-- Modal Nueva reserva-->
+<div class="modal fade" id="AgregarReserva" tabindex="-1" aria-labelledby="NewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="NewModalLabel">Nueva reserva</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="row justify-content-center align-items-center h-100">
+                        <div class="col-11">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form asp-controller="Home" asp-action="AddReserva" method="post">
+
+                                        <div class="mb-3">
+                                            <input type="hidden" asp-for="IdReservacion" />
+                                            <label for="NombrePersona" class="form-label">Persona que reserva:</label>
+                                            <input type="text" class="form-control" id="NombrePersona" name="NombrePersona" asp-for="NombrePersona">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="FechaReserva" class="form-label">Fecha de la reserva:</label>
+                                            <input type="datetime-local" class="form-control" id="FechaReserva" name="FechaReserva" asp-for="FechaReserva" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="IdLibro" class="form-label">libro:</label>
+                                            <select id="IdLibro" name="IdLibro" class="form-select" asp-for="IdLibro">
+                                                <option value="" hidden selected>Seleccione un libro</option>
+                                                @if (ViewBag.Libros != null)
+                                                {
+                                                    foreach (var libro in ViewBag.Libros)
+                                                    {
+                                                        <option value="@libro.IdLibro">@libro.NombreLibro</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="DiasAReservar" class="form-label">Dias a reservar:</label>
+                                            <input type="number" class="form-control" id="DiasAReservar" name="DiasAReservar" asp-for="DiasAReservar">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary w-100 mt-2">Reservar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

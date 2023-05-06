@@ -1,0 +1,54 @@
+﻿
+@{
+
+}
+
+@model Reservacion
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="text-center mb-4">Editar Reservación</h1>
+            <form method="post" asp-action="EditarReservacion" asp-controller="Home" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="IdReservacion" />
+                <div class="form-group mt-2">
+                    <label for="NombrePersona">Nombre de la persona:</label>
+                    <input type="text" asp-for="NombrePersona" class="form-control" id="NombrePersona" required>
+                    <div class="invalid-feedback">
+                        Por favor ingresa un nombre válido.
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="FechaReserva">Fecha de la reserva:</label>
+                    <input type="datetime-local" asp-for="FechaReserva" class="form-control" id="FechaReserva" required>
+                    <div class="invalid-feedback">
+                        Por favor ingresa una fecha válida.
+                    </div>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="IdLibro">libro:</label>
+                    <select id="IdLibro" name="IdLibro" class="form-select" asp-for="IdLibro">
+                        <option value="" hidden selected>Seleccione un libro</option>
+                        @if (ViewBag.Libros != null)
+                        {
+                            foreach (var libro in ViewBag.Libros)
+                            {
+                                <option value="@libro.IdLibro">@libro.NombreLibro</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="DiasAReservar">Días a reservar:</label>
+                    <input type="number" asp-for="DiasAReservar" class="form-control" id="DiasAReservar" required>
+                    <div class="invalid-feedback">
+                        Por favor ingresa un número válido.
+                    </div>
+                </div>
+                <div class="text-center mb-2">
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

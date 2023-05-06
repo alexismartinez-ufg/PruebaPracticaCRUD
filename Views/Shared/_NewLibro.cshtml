@@ -1,0 +1,60 @@
+﻿@model Libro
+
+<!-- Modal Nueva libro-->
+<div class="modal fade" id="AgregarLibro" tabindex="-1" aria-labelledby="NewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="NewModalLabel">Nuevo libro</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="row justify-content-center align-items-center h-100">
+                        <div class="col-11">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form asp-controller="Libros" asp-action="AddLibro" method="post">
+
+                                        <div class="mb-3">
+                                            <input type="hidden" asp-for="IdLibro" />
+                                            <label for="NombreLibro" class="form-label">Nombre libro:</label>
+                                            <input type="text" class="form-control" id="NombreLibro" name="NombreLibro" asp-for="NombreLibro">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="NombreAutor" class="form-label">Autor:</label>
+                                            <input type="text" class="form-control" id="NombreAutor" name="NombreAutor" asp-for="NombreAutor">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="FechaCreacion" class="form-label">Fecha de lanzamiento:</label>
+                                            <input type="datetime-local" class="form-control" id="FechaCreacion" name="FechaCreacion" asp-for="FechaCreacion" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="NumeroPaginas" class="form-label">Número de paginas:</label>
+                                            <input type="number" class="form-control" id="NumeroPaginas" name="NumeroPaginas" asp-for="NumeroPaginas">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="Idioma" class="form-label">Idioma:</label>
+                                            <input type="text" class="form-control" id="Idioma" name="Idioma" asp-for="Idioma">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="CantidadDisponible" class="form-label">Cantidad de libros disponibles:</label>
+                                            <input type="number" class="form-control" id="CantidadDisponible" name="CantidadDisponible" asp-for="CantidadDisponible">
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary w-100 mt-2">Agregar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

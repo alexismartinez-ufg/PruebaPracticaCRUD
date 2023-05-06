@@ -1,0 +1,43 @@
+﻿@{
+
+}
+
+@model Libro
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="text-center mb-4">Editar Reservación</h1>
+            <form method="post" asp-action="EditarLibro" asp-controller="Libros" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="IdLibro" />
+                <div class="form-group mt-2">
+                    <label for="NombreLibro">Nombre del libro:</label>
+                    <input type="text" asp-for="NombreLibro" class="form-control" id="NombreLibro" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="NombreAutor">Nombre del autor:</label>
+                    <input type="text" asp-for="NombreAutor" class="form-control" id="NombreAutor" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="FechaCreacion">Fecha de lanzamiento:</label>
+                    <input type="datetime-local" asp-for="FechaCreacion" class="form-control" id="FechaCreacion" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="NumeroPaginas">Numero de paginas:</label>
+                    <input type="number" asp-for="NumeroPaginas" class="form-control" id="NumeroPaginas" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="Idioma">Idioma:</label>
+                    <input type="text" asp-for="Idioma" class="form-control" id="Idioma" required>
+                </div>
+                <div class="form-group mt-2">
+                    <label for="CantidadDisponible">Cantidad de paginas:</label>
+                    <input type="number" asp-for="CantidadDisponible" class="form-control" id="CantidadDisponible" required>
+                </div>
+                <div class="text-center mb-2">
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
